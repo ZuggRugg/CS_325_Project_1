@@ -5,7 +5,10 @@
 # -----------------------------------------------------------------------
 
 import transformers as trans
+# from transformers import pipelin 
+# from transformers import pipeline
 # print("\nMy current version of Transformers:", trans.__version__)
+
 
 
 # Data Class :: reads the 'input.txt' and appends it to a list 
@@ -14,24 +17,30 @@ class data:
         self.input_list = []
         #make append function for list of input data
 
-    def read_data():
+    def read_data(self):
         f = open("input.txt", "r", encoding="UTF-8")
         data_read = f.read()
         print("\n", data_read)
         f.close()
         
 
+
 # Model Class :: Contains Information about the current two Prompted Models and Tokenizers used
 class models:
-    model1 = "distilgpt2"
-    model2 = "different model"
+    def __init__(self):
+        self.model1 = trans.AutoModelForCausalLM.from_pretrained('distilbert/distilgpt2')
+        self.tokenizer1 = trans.AutoTokenizer.from_pretrained('distilbert/distilgpt2')
+        # model2 = "different model"
 
     def response(self):
-        generator = trans.pipeline(task="text-generation", model="distilgpt2", tokenizer="distilgpt2")
-        x = generator("Hi how are you?")
+        generator = trans.pipeline(task="text-generation", model=self.model1, tokenizer=self.tokenizer1)
+        x = generator("Hi how are you? My name is Jack!")
         print(x)
 
 
-data.read_data() #Read out the current Input file
-new = models() 
-new.response() #generate common response using GPT2
+# Data = data()
+# Data.read_data()
+
+model_instance = models() 
+model_instance.response() #generate common response using GPT2
+
