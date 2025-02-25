@@ -4,6 +4,7 @@
 # Receive list of responses from two LLM's                              |
 # -----------------------------------------------------------------------
 
+import torch
 import transformers as t
 # print("\nMy current version of Transformers:", trans.__version__)
 
@@ -21,19 +22,24 @@ class data:
         f.close()
 
 
-# Model Class :: Contains Information about the current two Prompted Models and Tokenizers used
+# Model Class :: Contains Information about the current two Prompted Models and Tokenizers used 
 class models:
     def __init__(self):
         self.model1 = t.AutoModelForCausalLM.from_pretrained('distilbert/distilgpt2')
         self.tokenizer1 = t.AutoTokenizer.from_pretrained('distilbert/distilgpt2')
-        # self.model2 = t.AutoModelForCausalLM.from_pretrained('')
-        # self.tokenizer2 = t.AutoTokenizer.from_pretrained('')
 
-    def response(self):
-        generator1 = t.pipeline(task="text-generation", model=self.model1, tokenizer=self.tokenizer1)
-        x = generator1("Hi how are you? My name is Jack!")
-        
-        print(x)
+    def gpt2response(self, input_list):
+            generator1 = t.pipeline(task="text-generation", model=self.model1, tokenizer=self.tokenizer1)
+            for i in range(3):
+                x = generator1(input_list[i])
+                print('gpt2 output: ', x, '\n')
+
+
+    def TinyLlama_response(self, input_list):
+        self.model2 = t.AutoModelForCausalLM.from_pretrained('TinyLlama/TinyLlama-1.1B-Chat-v1.0')
+        generator2 = t.pipeline(task="text-generation", model=self.model1)
+        x = generator1(input_list[1])
+        print('TinyLlama output: ', x, '\n')
 
 
 # Read Data from Text file and append to a list :: data.input_list
@@ -41,7 +47,6 @@ Data = data()
 Data.read_data("input.txt")
 input_list = Data.input_list
 
-print("\n")
 
 model_instance = models() 
-model_instance.response() #generate common response using GPT2 and Llama 
+model_instance.gpt2response(input_list) #generate common response using GPT2 and Llama 
