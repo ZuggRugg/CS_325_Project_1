@@ -1,5 +1,16 @@
-[{'generated_text': "A shocking Chinese AI advancement called DeepSeek is sending US stocks plunging above 80 per cent below a week's low. While the latest move is shocking, investors are anxious to see the huge price gains coming to their fore.\n\n\n\n"}]
+gpt2 output: [{'generated_text': 'A shocking Chinese AI advancement called DeepSeek is sending US stocks plunging to a low of US$18.50. In the mid-1990s, the US was the first such high-speed AI race, with US$18.25'}]
 
-[{'generated_text': "As sales slump, Kohl's turns to a new CEO to bring back customers and boost revenues, adding a new revenue channel. As a new CEO he is the product manager for Kohl's online stores in Germany, he brings the company to the"}]
 
-[{'generated_text': 'Expect record-high egg prices for most of the year\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n'}]
+gpt2 output: [{'generated_text': "As sales slump, Kohl's turns to a new CEO to bring back customers to their favourite game at the same time.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"}]
+
+
+gpt2 output: [{'generated_text': 'Expect record-high egg prices for most of the year\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n'}]
+
+
+SmallLM output: [{'generated_text': 'A shocking Chinese AI advancement called DeepSeek is sending US stocks plunging, and the US stock market is now down 1.5% from its all-time high'}]
+
+
+SmallLM output: [{'generated_text': "As sales slump, Kohl's turns to a new CEO to bring back customers.\n\nIn the end, the company's decision to cut jobs and lay off employees is a"}]
+
+
+SmallLM output: [{'generated_text': 'Expect record-high egg prices for most of the year\n\nThe price of eggs has been steadily increasing over the past year, with the average price rising by'}]
