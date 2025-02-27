@@ -6,9 +6,8 @@
 
 import torch
 import transformers as t
-# print("\nMy current version of Transformers:", trans.__version__)
 
-# Data Class :: reads the 'input.txt' and appends it to a list
+# Data Class :: reads the 'input.txt' and appends it to a list ----------------
 class data:
     def __init__(self):
         self.input_list = [] # where the file contents are stored in the list
@@ -22,9 +21,19 @@ class data:
         f.close()
 
 
+    def write_data(self, outfile, contents):
+        with open(outfile, 'w') as outfile:
+            outfile.write('\n\n'.join(str(i) for i in contents))
+            outfile.close()
+# End of Class ---------------------------------------------------------------
+
+       
+
+
 # Model Class :: Contains Information about the current two Prompted Models and Tokenizers used 
 class models:
     def __init__(self):
+        self.output_list = []
         self.model1 = t.AutoModelForCausalLM.from_pretrained('distilbert/distilgpt2')
         self.tokenizer1 = t.AutoTokenizer.from_pretrained('distilbert/distilgpt2')
 
@@ -33,6 +42,7 @@ class models:
             for i in range(3):
                 x = generator1(input_list[i])
                 print('gpt2 output: ', x, '\n')
+                self.output_list.append(x)
 
 
     def TinyLlama_response(self, input_list):
@@ -40,6 +50,7 @@ class models:
         generator2 = t.pipeline(task="text-generation", model=self.model1)
         x = generator1(input_list[1])
         print('TinyLlama output: ', x, '\n')
+# End of Class ---------------------------------------------------------------
 
 
 # Read Data from Text file and append to a list :: data.input_list
@@ -49,4 +60,7 @@ input_list = Data.input_list
 
 
 model_instance = models() 
-model_instance.gpt2response(input_list) #generate common response using GPT2 and Llama 
+model_instance.gpt2response(input_list) #generate common response using GPT2 
+contents = model_instance.output_list
+
+Data.write_data('output.txt', contents)
