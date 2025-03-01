@@ -39,7 +39,7 @@ You can go to https://huggingface.co/blog/smollm and choose a smaller model vers
 
 
 ## compilation output:
-![output picture][image.png]
+![output picture][https://github.com/ZuggRugg/CS_325_Project_1/blob/master/image.png]
 
 
 
