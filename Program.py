@@ -28,8 +28,6 @@ class data:
 # End of Class ---------------------------------------------------------------
 
        
-
-
 # Model Class :: Contains Information about the current two Prompted Models and Tokenizers used 
 class models:
     def __init__(self):
@@ -49,8 +47,8 @@ class models:
 
 
     def SmallLM_response(self, input_list):
+        generator2 = t.pipeline(task="text-generation", model=self.model2, tokenizer=self.tokenizer2, torch_dtype=torch.bfloat16, device_map="auto")
         for i in range(3):
-            generator2 = t.pipeline(task="text-generation", model=self.model2, tokenizer=self.tokenizer2, torch_dtype=torch.bfloat16, device_map="auto")
             x = generator2(input_list[i])
             fstring = f"SmallLM output: {x}\n"
             print(fstring)
@@ -70,5 +68,3 @@ model_instance.SmallLM_response(input_list) # Generate common response using GPT
 output = model_instance.output_list
 
 Data.write_data('output.txt', output)
-
-

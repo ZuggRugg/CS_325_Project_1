@@ -36,3 +36,11 @@ The GPT2 Model has around 128 Million Parameters and the SmallLM model is runnin
 If you're running this on smaller laptops its possible that you might get a memory error, If that is the case then
 your computer might not be able to run the model. The GPT2 model should only need <1 GB of RAM
 You can go to https://huggingface.co/blog/smollm and choose a smaller model version depending on your hardware.
+
+
+## compilation output:
+![output picture][image.png]
+
+
+
+
