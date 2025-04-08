@@ -11,8 +11,10 @@ class get_Data:
     def read_file(self):
         with open("input.txt", 'r') as f:
             content = f.read()
-            print(content)
+            self.urls = content.splitlines()  # Assuming each line in input.txt is a URL or a block of data
+            print(self.urls)
             f.close()
+            return self.urls
 ## end of class :: ----------------------------------
 
 
@@ -23,16 +25,21 @@ class parse_Data:
         pass
 
     def soup_data(self):
-        print("hello")
+        parsed_results = []
+        # Loop through the data (Assuming data is HTML content in this case)
+        for html_content in self.data:
+            soup = BeautifulSoup(html_content, 'html.parser')
+            # Example parsing: Extracting all the links (anchor tags) from the HTML
+            links = soup.find_all('h1')
+            parsed_results.append([link.get('href') for link in links])  # Storing all links in the result
+        return parsed_results
+
 
 ## end of class :: ---------------------------------
 
 
-# URL = ["https://www.bizjournals.com/stlouis/", ""]
 
 # class WebSrapper():
-
-# URL = "http://www.values.com/inspirational-quotes"
 # r = requests.get(URL)
 # print(r.content)
 
@@ -44,6 +51,7 @@ class parse_Data:
 
 newOne = get_Data()
 newOne.read_file()
+
 
 
 print("program terminated!")
