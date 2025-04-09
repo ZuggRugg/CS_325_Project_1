@@ -1,10 +1,32 @@
-# TODO:
-make classes and find appropriate website to scrape
-
 # Introduction
-This Project deals with implementing a web scrapping library and using it to grab information from local news websites
 
-# Technology Used
-I used Python 3.13.3 with the Beautful Soup Package to parse and scrape HTML documents 
+This is the second Project for CS 325 Where we web-scrape 2-3 different websites to get information on a webpage.
+This project primarly uses Beautiful Soup as the Python Module to web scrape with.
 
-# Screenshots
+# Requirements
+
+Download the requirements.yml and install for an environment of your choosing using Venv or Miniconda 
+
+Miniconda:
+``` python3
+conda env update -n my_env --file requirements.yml
+```
+
+or you could use this for Venv or Miniconda after going to the virtual environment you want to use
+
+Venv:
+``` python3
+pip install -r requirements.yml
+```
+
+then to compile go over to the working directory and use the command
+
+```python3
+python main.py
+```
+
+# Misc / Explanation
+![articles-vs-scrapped][image.png]
+
+
+
