@@ -26,7 +26,7 @@ python main.py
 ```
 
 # Misc / Explanation
-![articles-vs-scrapped][image.png]
+![articles-vs-scrapped](image.png)
 
 
 
