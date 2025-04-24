@@ -17,7 +17,7 @@ class get_Data:
     ## Read file function
     def read_file(self):
         try:
-            with open("input.txt", 'r') as f:
+            with open("inputs/URL.txt", 'r') as f:
                 content = f.read()
                 self.urls = content.splitlines()  # Assuming each line in input.txt is a URL
                 print(self.urls)  # Print the URLs to verify
@@ -98,7 +98,7 @@ def main():
     print('\n')
 
     # Write results to output.txt
-    data_reader.write_data('output.txt', parsed_data)
+    data_reader.write_data('inputs/data.txt', parsed_data)
 
     print("Program terminated!")
 

@@ -7,6 +7,12 @@
 import torch
 import transformers as t
 
+
+# TODO: Get data from webScrapper to run through pipeline
+# TODO: Change models for sentiment anaylsis, pipeline and everything else should work the same.
+
+
+
 # Data Class :: reads the 'input.txt' and appends it to a list ----------------
 class data:
     def __init__(self):
@@ -39,6 +45,8 @@ class models:
 
     def gpt2response(self, input_list):
             generator1 = t.pipeline(task="text-generation", model=self.model1, tokenizer=self.tokenizer1, torch_dtype=torch.bfloat16, device_map="auto")
+
+            #TODO: input hardcoded for 3 lines in txt file, might need to change
             for i in range(3):
                 x = generator1(input_list[i])
                 fstring = f"gpt2 output: {x}\n"
@@ -58,7 +66,7 @@ class models:
 
 # Read Data from Text file and append to a list :: data.input_list
 Data = data()
-Data.read_data("input.txt")
+Data.read_data("inputs/data.txt")
 input_list = Data.input_list
 
 
@@ -67,6 +75,7 @@ model_instance.gpt2response(input_list) # Generate some output with SmallLM (360
 model_instance.SmallLM_response(input_list) # Generate common response using GPT2 (128 Million Parameters)
 output = model_instance.output_list
 
-Data.write_data('output.txt', output)
+Data.write_data('sentiment_anaylsis.txt', output)
+
 
 
