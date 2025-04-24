@@ -1,23 +1,33 @@
-# -----------------------------------------------------------------------
-# Shayne Tieman CS325 Project_1                                         |
-# Section 1                                                             |
-# Receive list of responses from two LLM's                              |
-# -----------------------------------------------------------------------
+##################################################################################
+# Shayne Tieman CS325 Project 3                                                  #
+# Section 1                                                                      #
+# Run sentiment anaylsis on data scrapped from web                               #
+##################################################################################
 
 import torch
 import transformers as t
 
-
 # TODO: Get data from webScrapper to run through pipeline
 # TODO: Change models for sentiment anaylsis, pipeline and everything else should work the same.
 
+## TODO: implement sentiment anaylsis
+###############################################################################
+# from transformers import pipeline                                           #
+#                                                                             #
+# classifier = pipeline("sentiment-analysis")                                 #
+#                                                                             #
+# result = classifier("I hate you")[0]                                        #
+# print(f"label: {result['label']}, with score: {round(result['score'], 4)}") #
+#                                                                             #
+# result = classifier("I love you")[0]                                        #
+# print(f"label: {result['label']}, with score: {round(result['score'], 4)}") #
+###############################################################################
 
 
 # Data Class :: reads the 'input.txt' and appends it to a list ----------------
 class data:
     def __init__(self):
         self.input_list = [] # where the file contents are stored in the list
-
 
     def read_data(self, myfile):
         f = open(myfile, "r", encoding="UTF-8")

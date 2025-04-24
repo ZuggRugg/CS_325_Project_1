@@ -8,6 +8,8 @@
 import requests
 from bs4 import BeautifulSoup
 
+#TODO: Email Manas about maybe scraping RSS instead becuase its way easier
+
 
 ## get_Data Class :: Gets the data from input file and reads into list
 class get_Data:
@@ -17,23 +19,26 @@ class get_Data:
     ## Read file function
     def read_file(self):
         try:
-            with open("inputs/URL.txt", 'r') as f:
+            with open("inputs/URLS.txt", 'r', encoding='utf-8') as f:
                 content = f.read()
                 self.urls = content.splitlines()  # Assuming each line in input.txt is a URL
                 print(self.urls)  # Print the URLs to verify
         except FileNotFoundError:
-            print("Error: 'input.txt' not found.")
+            print("Error: 'inputs/URLS.txt' not found.")
         return self.urls  # Return the list of URLs
 
     ## Write file Function, writes to a file
     def write_data(self, outfile, contents):
-        try:
-            with open(outfile, 'w') as f:
-                # Write each result on a new line
-                for item in contents:
-                    f.write(f"{item}\n")
-        except IOError as e:
-            print(f"Error writing to {outfile}: {e}")
+       try:
+        with open(outfile, 'w+', encoding='utf-8') as f:
+            for item in contents:
+                if isinstance(item, list):
+                    for subitem in item:
+                        f.write(subitem + '\n')
+                else:
+                    f.write(str(item) + '\n')
+       except IOError as e:
+           print(f"Error writing to {outfile}: {e}")
 
 
 
@@ -50,7 +55,7 @@ class parse_Website:
             print(f"Fetching content from: {url}")
             try:
                 # Fetch the HTML content of the URL
-                r = requests.get(url, timeout=10)  # Adding timeout to prevent hanging
+                r = requests.get(url, timeout=10)  
                 soup = BeautifulSoup(r.content, 'html.parser')
 
                 # Extract all <img> tags and getting the 'alt' attribute
