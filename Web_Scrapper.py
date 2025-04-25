@@ -9,7 +9,7 @@ import requests
 from bs4 import BeautifulSoup
 
 #TODO: Email Manas about maybe scraping RSS instead becuase its way easier
-
+# TODO: get the lxml xml parser so that I can properly 
 
 ## get_Data Class :: Gets the data from input file and reads into list
 class get_Data:
@@ -34,7 +34,7 @@ class get_Data:
             for item in contents:
                 if isinstance(item, list):
                     for subitem in item:
-                        f.write(subitem + '\n')
+                        f.write(str(subitem) + '\n')
                 else:
                     f.write(str(item) + '\n')
        except IOError as e:
@@ -59,19 +59,13 @@ class parse_Website:
                 soup = BeautifulSoup(r.content, 'html.parser')
 
                 # Extract all <img> tags and getting the 'alt' attribute
-                img_tags = soup.find_all('img')
-                alt_texts = [img.get('alt') for img in img_tags if img.get('alt')]  # Only include imgs with alt text
+                xml_title = soup.find_all('title') 
+                
+                # If no relevant text is found in RSS, note that no data was retrieved
+                if not xml_title:
+                    xml_title = [f"No relevant content found on {url}"]
 
-                if not alt_texts:  # If no alt text is found
-                    print(f"No alt text found in images on {url}, checking for h2 tags.\n")
-                    h3_tags = soup.find_all('h3')  # Find <h3> tags with specific class
-                    alt_texts = [h3.get_text(strip=True) for h3 in h3_tags]  # Get the text content of <h3> tags
-
-                    # If no relevant text is found from either, note that no data was retrieved
-                    if not alt_texts:
-                        alt_texts = [f"No relevant content found on {url}"]
-
-                parsed_results.append(alt_texts)  # Store the results for this URL
+                parsed_results.append(xml_title)  # Store the results for this URL
 
             except requests.exceptions.RequestException as e:
                 print(f"Failed to retrieve {url}: {e}")
