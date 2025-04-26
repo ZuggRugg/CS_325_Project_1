@@ -9,7 +9,7 @@ import requests
 from bs4 import BeautifulSoup
 
 #TODO: Email Manas about maybe scraping RSS instead becuase its way easier
-# TODO: get the lxml xml parser so that I can properly 
+#TODO: get another RSS feed and rewrite function to accept only 10 feeds per link
 
 ## get_Data Class :: Gets the data from input file and reads into list
 class get_Data:
@@ -56,16 +56,18 @@ class parse_Website:
             try:
                 # Fetch the HTML content of the URL
                 r = requests.get(url, timeout=10)  
-                soup = BeautifulSoup(r.content, 'html.parser')
+                soup = BeautifulSoup(r.content, 'xml')
 
                 # Extract all <img> tags and getting the 'alt' attribute
-                xml_title = soup.find_all('title') 
-                
-                # If no relevant text is found in RSS, note that no data was retrieved
-                if not xml_title:
-                    xml_title = [f"No relevant content found on {url}"]
+                items = soup.find_all('item') 
+                for item in items:
+                    title = item.find('title').text
+                    parsed_results.append(title)  # Store the results for this URL
 
-                parsed_results.append(xml_title)  # Store the results for this URL
+                # If no relevant text is found in RSS, note that no data was retrieved
+                if not items:
+                    xml_title = [f"No relevant content found on {url}"]
+                    parsed_results.append(xml_title)
 
             except requests.exceptions.RequestException as e:
                 print(f"Failed to retrieve {url}: {e}")

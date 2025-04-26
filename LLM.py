@@ -7,8 +7,8 @@
 import torch
 import transformers as t
 
-# TODO: Get data from webScrapper to run through pipeline
 # TODO: Figure out why generating extra response at end (from newline character)
+# TODO: add pytests
 
 # Data Class :: reads the 'inputs/data.txt' and appends it to a list ----------------
 class data:
@@ -36,7 +36,6 @@ class models:
     def __init__(self):
         self.output_list = []
 
-
     def sentiment_anaylsis(self, input_list):
             classifier = t.pipeline("sentiment-analysis")
 
@@ -49,6 +48,7 @@ class models:
 
 
 # Read Data from Text file and append to a list :: data.input_list
+# then write to the sentiment_anaylsis file all the 'positive' or 'negative' scores
 def main():
     Data = data()
     Data.read_data("inputs/data.txt")
