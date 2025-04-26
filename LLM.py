@@ -41,7 +41,8 @@ class models:
             classifier = t.pipeline("sentiment-analysis")
 
             for i in input_list:
-                self.output_list.append(classifier(i)[0])
+                result = classifier(i)[0]
+                self.output_list.append(result['label'])
                 # print(input_list[i], "\n", output_list[i], "\n")
 
 # End of Class ---------------------------------------------------------------

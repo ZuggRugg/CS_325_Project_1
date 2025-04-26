@@ -5,9 +5,11 @@
 ###########################
 
 
-# import Web_Scrapper 
-# import LLM
+import Web_Scrapper 
+import LLM
+
+# Web_Scrapper.main()
+# LLM.main()
 
 
-print("hello")
 
