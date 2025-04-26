@@ -16,3 +16,4 @@ The first thing you will need to run this project is some form of virtual enviro
 
 
 # Images
+![outputs](https://github.com/ZuggRugg/CS_325_Project_1/blob/final/img/Outputs.png)
