@@ -48,33 +48,29 @@ class parse_Website:
         self.data = data  # Initialize with the data (the list of URLs)
 
     def soup_data(self):
-        parsed_results = []
+        parsed_results = [] 
         
         # Loop through the URLs (not HTML content)
         for url in self.data:
             print(f"Fetching content from: {url}")
             try:
-                # Fetch the HTML content of the URL
-                r = requests.get(url, timeout=10)  
+                r = requests.get(url, timeout=10)
                 soup = BeautifulSoup(r.content, 'xml')
-
-                # Extract all <img> tags and getting the 'alt' attribute
-                items = soup.find_all('item') 
-                for item in items:
-                    title = item.find('title').text
-                    parsed_results.append(title)  # Store the results for this URL
-
-                # If no relevant text is found in RSS, note that no data was retrieved
-                if not items:
-                    xml_title = [f"No relevant content found on {url}"]
-                    parsed_results.append(xml_title)
+                
+                items = soup.find_all('item')
+                
+                for item in items[:10]:  # Get up to 10 headlines
+                    title_tag = item.find('title')
+                    if title_tag:
+                        parsed_results.append(title_tag.text)
+                    else:
+                        parsed_results.append("No title found in item")
 
             except requests.exceptions.RequestException as e:
                 print(f"Failed to retrieve {url}: {e}")
                 parsed_results.append(f"Failed to fetch {url}")
-        
-        return parsed_results
 
+        return parsed_results
 
 
 ## Main function ----------------------------------------------
@@ -83,19 +79,17 @@ def main():
     data_reader = get_Data()
     urls = data_reader.read_file()
 
+    # TODO: make this a pytest thing
     if not urls:
         print("No URLs found in input.txt. Exiting program.")
         return
 
+
     # Parse the URLs using BeautifulSoup
     parser = parse_Website(urls)
     parsed_data = parser.soup_data()  # Get parsed results
-
-    # Print parsed results
-    print("Parsed Data:")
-    for result in parsed_data:
-        print(result)
-
+    
+    
     print('\n')
 
     # Write results to output.txt

@@ -1,1 +1,2 @@
 https://thesouthern.com/search/?f=rss&t=article&c=news/nation-world/business&l=50&s=start_time&sd=desc
+https://www.ibjonline.com/feed/
