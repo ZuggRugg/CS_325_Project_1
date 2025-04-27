@@ -46,23 +46,8 @@ class models:
 
 # End of Class ---------------------------------------------------------------
 
-
 # Read Data from Text file and append to a list :: data.input_list
 # then write to the sentiment_anaylsis file all the 'positive' or 'negative' scores
-def main():
-    Data = data()
-    Data.read_data("inputs/data.txt")
-    input_list = Data.input_list
 
-
-    model_instance = models()
-    model_instance.sentiment_anaylsis(input_list)
-    
-    output = model_instance.output_list
-    
-    Data.write_data('inputs/sentiment_anaylsis.txt', output)
-
-if __name__ == "__main__":
-    main()
 
 

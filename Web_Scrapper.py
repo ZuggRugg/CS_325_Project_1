@@ -8,9 +8,6 @@
 import requests
 from bs4 import BeautifulSoup
 
-#TODO: Email Manas about maybe scraping RSS instead becuase its way easier
-#TODO: get another RSS feed and rewrite function to accept only 10 feeds per link
-
 ## get_Data Class :: Gets the data from input file and reads into list
 class get_Data:
     def __init__(self):
@@ -41,7 +38,6 @@ class get_Data:
            print(f"Error writing to {outfile}: {e}")
 
 
-
 ## parse_data Class :: Parse's the data with the BeautifulSoup package
 class parse_Website:
     def __init__(self, data):
@@ -59,44 +55,19 @@ class parse_Website:
                 
                 items = soup.find_all('item')
                 
-                for item in items[:10]:  # Get up to 10 headlines
-                    title_tag = item.find('title')
-                    if title_tag:
-                        parsed_results.append(title_tag.text)
-                    else:
-                        parsed_results.append("No title found in item")
+                if items:
+                    for item in items[:10]:  # Get up to 10 headlines
+                        title_tag = item.find('title')
+                        if title_tag:
+                            parsed_results.append(title_tag.text)
+                        else:
+                            parsed_results.append("No title found in item")
+
+                else:
+                    print(f"Could not find fetch items for url")
 
             except requests.exceptions.RequestException as e:
                 print(f"Failed to retrieve {url}: {e}")
                 parsed_results.append(f"Failed to fetch {url}")
 
         return parsed_results
-
-
-## Main function ----------------------------------------------
-def main():
-    # Read data (URLs) from input.txt
-    data_reader = get_Data()
-    urls = data_reader.read_file()
-
-    # TODO: make this a pytest thing
-    if not urls:
-        print("No URLs found in input.txt. Exiting program.")
-        return
-
-
-    # Parse the URLs using BeautifulSoup
-    parser = parse_Website(urls)
-    parsed_data = parser.soup_data()  # Get parsed results
-    
-    
-    print('\n')
-
-    # Write results to output.txt
-    data_reader.write_data('inputs/data.txt', parsed_data)
-
-    print("Program terminated!")
-
-if __name__ == "__main__":
-    main()
-
