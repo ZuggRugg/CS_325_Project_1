@@ -13,7 +13,7 @@ def test_inputs_folder_exists():
 
 
 # test to make sure that data.txt exists and isn't empty
-def test_data_txt_not_empty():
+def test_data_txt_not_empty(): 
     filepath = '../inputs/data.txt'
     assert os.path.isfile(filepath), "data.txt does not exist"
     assert os.path.getsize(filepath) > 0, "data.txt file is empty"
