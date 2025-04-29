@@ -6,9 +6,23 @@
 
 import torch
 import transformers as t
+from abc import ABC, abstractmethod 
 
 # TODO: Figure out why generating extra response at end (from newline character)
 # TODO: add pytests
+
+
+# Define the interface ------------------------------
+class DataIO(ABC):
+    @abstractmethod
+    def read_data(self, myfile):
+        pass
+
+    @abstractmethod
+    def write_data(self, outfile, contents):
+        pass
+# -----------------------------------------------------
+
 
 # Data Class :: reads the 'inputs/data.txt' and appends it to a list ----------------
 class data:
